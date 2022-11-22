@@ -160,6 +160,13 @@ function  movimentaRaqueteOponeente() {
 }
 
 
+function bolinhaNaoFicaPresa(){
+    if (xBolinha - raio < 0){
+    xBolinha = 23
+    }
+}
+
+
 
 
 
