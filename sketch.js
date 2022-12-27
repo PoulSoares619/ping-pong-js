@@ -33,17 +33,14 @@ let colidiu = false;
 
 
 function preload() {
-
     trilha = loadSound("trilha.mp3");
     raquetada = loadSound("raquetada.mp3");
     ponto = loadSound("ponto.mp3");
-
 }
 
 function setup() {
     createCanvas(600, 400);
     trilha.loop();
-
 }
 
 function draw() {
@@ -62,28 +59,21 @@ function draw() {
     marcaPontos();
     calculaChanceDeErrar();
     bolinhaNaoFicaPresa();
-
 }
 
 function desenhaBolinha() {
-
     circle(xBolinha, yBolinha, diametro);
-
 }
 
 function velocidadeBolinha() {
-
     xBolinha += velocidadeX;
     yBolinha += velocidadeY;
-
 }
 
 function colisaoBordas() {
-
     if (xBolinha + raio > width || xBolinha - raio < 0) {
         velocidadeX *= -1
     }
-
     if (yBolinha + raio > height || yBolinha - raio < 0) {
         velocidadeY *= -1
     }
@@ -93,70 +83,50 @@ function desenhaRaquete(x, y) {
     rect(x, y, larguraRaquete, alturaRaquete );
 }
 
-
 function movimentaRaquete(){
-
     if(keyIsDown(UP_ARROW)) {
         yRaquete  -= 10;
     }
-
-    if(keyIsDown(DOWN_ARROW)) {
+        if(keyIsDown(DOWN_ARROW)) {
         yRaquete  += 10;
     }
 }
 
 function verificaColisaoRaquete(){
-
     if(xBolinha - raio < xRaquete + larguraRaquete &&
     yBolinha - raio < yRaquete + alturaRaquete &&
-    yBolinha + raio > yRaquete - alturaRaquete) {
-    
+    yBolinha + raio > yRaquete - alturaRaquete) {    
         velocidadeX *= -1;
         raquetada.play();
     }
-
 }
 
-function verificaColisaoRaquete(x, y) {
-    
-    colidiu =  collideRectCircle(x, y, larguraRaquete, alturaRaquete, xBolinha, yBolinha, raio);
-    
-    if (colidiu){
-    
+function verificaColisaoRaquete(x, y) {    
+    colidiu =  collideRectCircle(x, y, larguraRaquete, alturaRaquete, xBolinha, yBolinha, raio);    
+    if (colidiu){    
         velocidadeX *= -1;
-        raquetada.play();
-    
-    }
-    
+        raquetada.play();    
+    }    
 }
 
-function calculaChanceDeErrar() {
-    
+function calculaChanceDeErrar() {    
     if(oponentePontos >= meusPontos ) {
-        chanceDeErrar += 1;
-    
+        chanceDeErrar += 1;    
         if(chanceDeErrar >= 39) {
-
             chanceDeErrar = 40;
-
         }
-
     } else { 
-    chanceDeErrar -= 1;
-    
+    chanceDeErrar -= 1;    
         if (chanceDeErrar <= 35) {
             chanceDeErrar = 35
-        }
-    
+        }    
     }
 }
 
-function  movimentaRaqueteOponeente() {
-    
+function  movimentaRaqueteOponeente() {    
     velocidadeYOponente = yBolinha -yRaqueteOponente - larguraRaquete / 2 - 30;
     yRaqueteOponente += velocidadeYOponente;
     calculaChanceDeErrar();
-
 }
 
 
